@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0A0F1C;
+  --surface: #1E293B;
+  --surface-light: #334155;
+  --foreground: #ffffff;
+  --foreground-secondary: #cbd5e1;
+  --primary: #3B82F6;
+  --primary-gradient: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  --accent: #06B6D4;
+  --border: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+}
+
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+  background: var(--primary-gradient);
+  padding: 1px;
+}
+
+.gradient-border > * {
+  background: var(--surface);
+  height: 100%;
+  width: 100%;
+}
