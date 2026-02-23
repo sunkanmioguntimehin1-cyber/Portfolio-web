@@ -1,6 +1,9 @@
+
+
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ChatBot from "@/components/ChatBot";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,11 +19,19 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "SuperSoft - Building the Future of Software",
-  description: "SuperSoft is a full-service software engineering company offering cutting-edge solutions across web, mobile, and AI technologies.",
-  keywords: ["software development", "web development", "mobile apps", "AI solutions", "cloud services"],
+  description:
+    "SuperSoft is a full-service software engineering company offering cutting-edge solutions across web, mobile, and AI technologies.",
+  keywords: [
+    "software development",
+    "web development",
+    "mobile apps",
+    "AI solutions",
+    "cloud services",
+  ],
   openGraph: {
     title: "SuperSoft - Building the Future of Software",
-    description: "Full-service software engineering company offering web, mobile, and AI solutions.",
+    description:
+      "Full-service software engineering company offering web, mobile, and AI solutions.",
     type: "website",
   },
 };
@@ -36,6 +47,9 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
+
+        {/* AI Lead Chatbot — floats on all pages */}
+        <ChatBot />
       </body>
     </html>
   );

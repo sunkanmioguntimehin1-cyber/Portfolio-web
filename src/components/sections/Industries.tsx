@@ -1,52 +1,214 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { siteData } from "@/lib/data";
-import Card, { CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card";
 
 const Industries: React.FC = () => {
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
   return (
-    <section id="industries" className="py-20 bg-gradient-to-b from-surface/50 to-background">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Industries We <span className="gradient-text">Serve</span>
+    <section
+      id="industries"
+      style={{
+        padding: "120px 0",
+        background: "#0D1120",
+        position: "relative",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 1,
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 16,
+            }}
+          >
+            <div
+              style={{
+                width: 24,
+                height: 2,
+                background: "linear-gradient(135deg, #3B6FFF, #7C3AED)",
+                borderRadius: 1,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#5B8AFF",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              Who We Help
+            </span>
+            <div
+              style={{
+                width: 24,
+                height: 2,
+                background: "linear-gradient(135deg, #7C3AED, #3B6FFF)",
+                borderRadius: 1,
+              }}
+            />
+          </div>
+
+          <h2
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: "#F8FAFC",
+              lineHeight: 1.1,
+              marginBottom: 16,
+            }}
+          >
+            Industries We{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Serve
+            </span>
           </h2>
-          <p className="text-xl text-foreground-secondary max-w-3xl mx-auto">
-            We have deep expertise across multiple industries, delivering tailored solutions that drive innovation and growth.
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 16,
+              color: "#64748B",
+              lineHeight: 1.7,
+              maxWidth: 520,
+              margin: "0 auto",
+            }}
+          >
+            Deep domain expertise across multiple industries, delivering
+            tailored solutions that drive innovation and growth.
           </p>
         </div>
 
-        {/* Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {siteData.industries.map((industry, index) => (
-            <Card
+        {/* Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 16,
+          }}
+        >
+          {siteData.industries.map((industry) => (
+            <div
               key={industry.id}
-              hover
-              glass
-              className="h-full text-center"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              onMouseEnter={() => setHoveredId(industry.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                padding: "28px",
+                borderRadius: 16,
+                background:
+                  hoveredId === industry.id
+                    ? "rgba(59, 111, 255, 0.08)"
+                    : "rgba(255,255,255,0.02)",
+                border: `1px solid ${hoveredId === industry.id ? "rgba(59, 111, 255, 0.3)" : "rgba(255,255,255,0.06)"}`,
+                transition: "all 0.25s ease",
+                cursor: "pointer",
+              }}
             >
-              <CardHeader>
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-violet-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  {industry.icon}
+              <div
+                style={{ display: "flex", alignItems: "flex-start", gap: 16 }}
+              >
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 12,
+                    background:
+                      hoveredId === industry.id
+                        ? "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)"
+                        : "rgba(59, 111, 255, 0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  <span
+                    style={{
+                      color: hoveredId === industry.id ? "white" : "#5B8AFF",
+                    }}
+                  >
+                    {industry.icon}
+                  </span>
                 </div>
-                <CardTitle>{industry.name}</CardTitle>
-              </CardHeader>
-              
-              <CardContent>
-                <CardDescription className="mb-4">
-                  {industry.description}
-                </CardDescription>
-                <div className="text-2xl font-bold gradient-text">
-                  {industry.projects}+
+
+                <div style={{ flex: 1 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      marginBottom: 8,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "'Sora', sans-serif",
+                        fontSize: 16,
+                        fontWeight: 700,
+                        color: "#E2E8F0",
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      {industry.name}
+                    </h3>
+                    <span
+                      style={{
+                        fontFamily: "'Sora', sans-serif",
+                        fontSize: 18,
+                        fontWeight: 800,
+                        background:
+                          "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        flexShrink: 0,
+                        marginLeft: 8,
+                      }}
+                    >
+                      {industry.projects}+
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 13,
+                      color: "#64748B",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {industry.description}
+                  </p>
                 </div>
-                <div className="text-sm text-foreground-secondary">
-                  Projects Completed
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

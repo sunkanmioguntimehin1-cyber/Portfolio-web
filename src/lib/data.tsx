@@ -1,44 +1,47 @@
 import React from "react";
-import { 
-  Globe, 
-  Smartphone, 
-  Bot, 
-  Cloud, 
-  Palette, 
-  Settings, 
-  Activity, 
-  CreditCard, 
-  ShoppingBag, 
-  GraduationCap, 
-  Plane, 
+import {
+  Globe,
+  Smartphone,
+  Bot,
+  Cloud,
+  Palette,
+  Settings,
+  Activity,
+  CreditCard,
+  ShoppingBag,
+  GraduationCap,
+  Plane,
   Rocket,
   Twitter,
   Linkedin,
   Github,
-  Instagram
+  Instagram,
 } from "lucide-react";
 
 export const siteData = {
   company: {
     name: "SuperSoft",
     tagline: "Building the Future of Software",
-    description: "SuperSoft is a full-service software engineering company offering cutting-edge solutions across web, mobile, and AI technologies.",
+    description:
+      "SuperSoft is a full-service software engineering company offering cutting-edge solutions across web, mobile, and AI technologies.",
     contact: {
       email: "hello@supersoft.com",
-      phone: "+1 (555) 123-4567",
+      // Google Voice number — real number is never exposed
+      phone: "+1 (555) 987-6663",
       address: "123 Tech Street, Silicon Valley, CA 94025",
     },
   },
   hero: {
     title: "Building the Future of Software",
-    subtitle: "Transform your ideas into powerful digital solutions with our expert team of engineers and designers.",
+    subtitle:
+      "Transform your ideas into powerful digital solutions with our expert team of engineers and designers.",
     ctaButtons: [
       { text: "Start Your Project", href: "#contact", primary: true },
       { text: "View Our Work", href: "#portfolio", primary: false },
     ],
     animatedTexts: [
       "Web Development",
-      "Mobile Apps", 
+      "Mobile Apps",
       "AI Solutions",
       "Cloud Architecture",
     ],
@@ -47,34 +50,64 @@ export const siteData = {
     {
       id: 1,
       title: "Web Development",
-      description: "Custom web applications built with modern frameworks and best practices.",
+      description:
+        "Custom web applications built with modern frameworks and best practices.",
       icon: <Globe className="w-8 h-8 text-white" />,
       technologies: ["Next.js", "React", "Vue.js", "Node.js", "TypeScript"],
-      features: ["Progressive Web Apps", "E-commerce Platforms", "Enterprise Solutions", "API Development"],
+      features: [
+        "Progressive Web Apps",
+        "E-commerce Platforms",
+        "Enterprise Solutions",
+        "API Development",
+      ],
     },
     {
       id: 2,
       title: "Mobile Development",
-      description: "Native and cross-platform mobile applications for iOS and Android.",
+      description:
+        "Native and cross-platform mobile applications for iOS and Android.",
       icon: <Smartphone className="w-8 h-8 text-white" />,
       technologies: ["React Native", "Expo", "Flutter", "Swift", "Kotlin"],
-      features: ["iOS & Android Apps", "Cross-Platform Solutions", "App Store Deployment", "Push Notifications"],
+      features: [
+        "iOS & Android Apps",
+        "Cross-Platform Solutions",
+        "App Store Deployment",
+        "Push Notifications",
+      ],
     },
     {
       id: 3,
       title: "AI & Agents",
-      description: "Cutting-edge AI solutions powered by machine learning and large language models.",
+      description:
+        "Cutting-edge AI solutions powered by machine learning and large language models.",
       icon: <Bot className="w-8 h-8 text-white" />,
-      technologies: ["OpenAI APIs", "TensorFlow", "PyTorch", "LangChain", "Vector Databases"],
-      features: ["ChatGPT Integration", "Custom AI Agents", "ML Models", "Data Analytics"],
+      technologies: [
+        "OpenAI APIs",
+        "TensorFlow",
+        "PyTorch",
+        "LangChain",
+        "Vector Databases",
+      ],
+      features: [
+        "ChatGPT Integration",
+        "Custom AI Agents",
+        "ML Models",
+        "Data Analytics",
+      ],
     },
     {
       id: 4,
       title: "Cloud & DevOps",
-      description: "Scalable cloud infrastructure and automated deployment pipelines.",
+      description:
+        "Scalable cloud infrastructure and automated deployment pipelines.",
       icon: <Cloud className="w-8 h-8 text-white" />,
       technologies: ["AWS", "Azure", "Google Cloud", "Docker", "Kubernetes"],
-      features: ["Cloud Migration", "CI/CD Pipelines", "Infrastructure as Code", "Monitoring"],
+      features: [
+        "Cloud Migration",
+        "CI/CD Pipelines",
+        "Infrastructure as Code",
+        "Monitoring",
+      ],
     },
     {
       id: 5,
@@ -82,57 +115,74 @@ export const siteData = {
       description: "Beautiful, user-centered designs that delight and convert.",
       icon: <Palette className="w-8 h-8 text-white" />,
       technologies: ["Figma", "Adobe XD", "Sketch", "Framer", "Prototyping"],
-      features: ["Design Systems", "User Research", "Prototyping", "Brand Identity"],
+      features: [
+        "Design Systems",
+        "User Research",
+        "Prototyping",
+        "Brand Identity",
+      ],
     },
     {
       id: 6,
       title: "Custom Software",
-      description: "Tailored enterprise solutions to solve your unique business challenges.",
+      description:
+        "Tailored enterprise solutions to solve your unique business challenges.",
       icon: <Settings className="w-8 h-8 text-white" />,
       technologies: [".NET", "Java", "Python", "Ruby", "Go"],
-      features: ["Enterprise Software", "SaaS Platforms", "ERP Systems", "API Integration"],
+      features: [
+        "Enterprise Software",
+        "SaaS Platforms",
+        "ERP Systems",
+        "API Integration",
+      ],
     },
   ],
   industries: [
     {
       id: 1,
       name: "Healthcare & Medical",
-      description: "Secure, compliant software solutions for healthcare providers and medical technology companies.",
+      description:
+        "Secure, compliant software solutions for healthcare providers and medical technology companies.",
       icon: <Activity className="w-6 h-6" />,
       projects: 120,
     },
     {
       id: 2,
       name: "FinTech & Banking",
-      description: "Robust financial technology solutions with enhanced security and regulatory compliance.",
+      description:
+        "Robust financial technology solutions with enhanced security and regulatory compliance.",
       icon: <CreditCard className="w-6 h-6" />,
       projects: 85,
     },
     {
       id: 3,
       name: "E-commerce & Retail",
-      description: "Scalable e-commerce platforms that drive sales and enhance customer experience.",
+      description:
+        "Scalable e-commerce platforms that drive sales and enhance customer experience.",
       icon: <ShoppingBag className="w-6 h-6" />,
       projects: 150,
     },
     {
       id: 4,
       name: "Education & EdTech",
-      description: "Innovative learning management systems and educational technology platforms.",
+      description:
+        "Innovative learning management systems and educational technology platforms.",
       icon: <GraduationCap className="w-6 h-6" />,
       projects: 95,
     },
     {
       id: 5,
       name: "Travel & Hospitality",
-      description: "Comprehensive booking systems and hospitality management solutions.",
+      description:
+        "Comprehensive booking systems and hospitality management solutions.",
       icon: <Plane className="w-6 h-6" />,
       projects: 60,
     },
     {
       id: 6,
       name: "Startups",
-      description: "MVP development and rapid prototyping for startups and entrepreneurs.",
+      description:
+        "MVP development and rapid prototyping for startups and entrepreneurs.",
       icon: <Rocket className="w-6 h-6" />,
       projects: 200,
     },
@@ -147,7 +197,8 @@ export const siteData = {
     {
       id: 1,
       title: "HealthPlus Platform",
-      description: "Comprehensive telemedicine platform connecting patients with healthcare providers.",
+      description:
+        "Comprehensive telemedicine platform connecting patients with healthcare providers.",
       category: "Healthcare",
       technologies: ["Next.js", "Node.js", "PostgreSQL", "AWS"],
       image: "/images/portfolio/healthplus.jpg",
@@ -157,7 +208,8 @@ export const siteData = {
     {
       id: 2,
       title: "FinFlow Banking App",
-      description: "Modern banking application with real-time transactions and AI-powered insights.",
+      description:
+        "Modern banking application with real-time transactions and AI-powered insights.",
       category: "FinTech",
       technologies: ["React Native", "Python", "AWS", "TensorFlow"],
       image: "/images/portfolio/finflow.jpg",
@@ -167,7 +219,8 @@ export const siteData = {
     {
       id: 3,
       title: "ShopSmart E-commerce",
-      description: "AI-powered e-commerce platform with personalized recommendations and inventory management.",
+      description:
+        "AI-powered e-commerce platform with personalized recommendations and inventory management.",
       category: "E-commerce",
       technologies: ["Next.js", "Magento", "OpenAI", "Redis"],
       image: "/images/portfolio/shopsmart.jpg",
@@ -177,7 +230,8 @@ export const siteData = {
     {
       id: 4,
       title: "EduLearn LMS",
-      description: "Advanced learning management system with interactive content and progress tracking.",
+      description:
+        "Advanced learning management system with interactive content and progress tracking.",
       category: "Education",
       technologies: ["Vue.js", "Django", "WebRTC", "Azure"],
       image: "/images/portfolio/edulearn.jpg",
@@ -187,7 +241,8 @@ export const siteData = {
     {
       id: 5,
       title: "TravelHub Platform",
-      description: "Integrated travel booking platform with flight, hotel, and car rental services.",
+      description:
+        "Integrated travel booking platform with flight, hotel, and car rental services.",
       category: "Travel",
       technologies: ["React", "Node.js", "MongoDB", "Google Cloud"],
       image: "/images/portfolio/travelhub.jpg",
@@ -197,7 +252,8 @@ export const siteData = {
     {
       id: 6,
       title: "QuickStart MVP",
-      description: "Rapid prototype development for a startup's innovative social networking concept.",
+      description:
+        "Rapid prototype development for a startup's innovative social networking concept.",
       category: "Startup",
       technologies: ["Expo", "Firebase", "GraphQL", "Vercel"],
       image: "/images/portfolio/quickstart.jpg",
@@ -212,7 +268,8 @@ export const siteData = {
       position: "CTO",
       company: "HealthPlus Medical",
       image: "/images/testimonials/sarah.jpg",
-      content: "SuperSoft transformed our healthcare platform with their innovative solutions. Their expertise in telemedicine and compliance requirements was invaluable. The new system has improved patient engagement by 300%.",
+      content:
+        "SuperSoft transformed our healthcare platform with their innovative solutions. Their expertise in telemedicine and compliance requirements was invaluable. The new system has improved patient engagement by 300%.",
       rating: 5,
     },
     {
@@ -221,7 +278,8 @@ export const siteData = {
       position: "CEO",
       company: "FinFlow",
       image: "/images/testimonials/michael.jpg",
-      content: "Working with SuperSoft was a game-changer for our FinTech startup. They delivered a robust, secure banking app that exceeded our expectations. Their attention to detail and security-first approach is unmatched.",
+      content:
+        "Working with SuperSoft was a game-changer for our FinTech startup. They delivered a robust, secure banking app that exceeded our expectations. Their attention to detail and security-first approach is unmatched.",
       rating: 5,
     },
     {
@@ -230,7 +288,8 @@ export const siteData = {
       position: "Product Manager",
       company: "ShopSmart",
       image: "/images/testimonials/emily.jpg",
-      content: "SuperSoft's AI integration has revolutionized our e-commerce platform. The personalized recommendations have increased our conversion rate by 45%. Their team is professional, innovative, and always delivers on time.",
+      content:
+        "SuperSoft's AI integration has revolutionized our e-commerce platform. The personalized recommendations have increased our conversion rate by 45%. Their team is professional, innovative, and always delivers on time.",
       rating: 5,
     },
     {
@@ -239,7 +298,8 @@ export const siteData = {
       position: "Founder",
       company: "QuickStart",
       image: "/images/testimonials/david.jpg",
-      content: "As a startup, we needed speed and quality. SuperSoft delivered our MVP in record time without compromising on functionality. Their agile approach and technical expertise helped us secure funding.",
+      content:
+        "As a startup, we needed speed and quality. SuperSoft delivered our MVP in record time without compromising on functionality. Their agile approach and technical expertise helped us secure funding.",
       rating: 5,
     },
   ],
@@ -317,10 +377,12 @@ export const siteData = {
   },
   contact: {
     title: "Ready to Transform Your Ideas into Reality?",
-    subtitle: "Let's discuss how we can help bring your vision to life with our expert software engineering services.",
+    subtitle:
+      "Let's discuss how we can help bring your vision to life with our expert software engineering services.",
     cta: "Start Your Project",
     email: "hello@supersoft.com",
-    phone: "+1 (555) 123-4567",
+    // Google Voice number displayed publicly — real number stays private
+    phone: "+1 (555) 987-6663",
     address: "123 Tech Street, Silicon Valley, CA 94025",
     officeLocations: [
       "Silicon Valley, CA",

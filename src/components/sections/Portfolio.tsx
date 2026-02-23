@@ -1,142 +1,414 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { siteData } from "@/lib/data";
-import Card, { CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card";
+
+const categoryEmoji: Record<string, string> = {
+  Healthcare: "🏥",
+  FinTech: "💳",
+  "E-commerce": "🛍️",
+  Education: "🎓",
+  Travel: "✈️",
+  Startup: "🚀",
+};
+
+const categoryColor: Record<string, string> = {
+  Healthcare: "#10B981",
+  FinTech: "#F59E0B",
+  "E-commerce": "#EF4444",
+  Education: "#8B5CF6",
+  Travel: "#3B82F6",
+  Startup: "#06B6D4",
+};
 
 const Portfolio: React.FC = () => {
-  const featuredProjects = siteData.portfolio.filter(project => project.featured);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const featuredProjects = siteData.portfolio.filter((p) => p.featured);
   const allProjects = siteData.portfolio;
 
   return (
-    <section id="portfolio" className="py-20 bg-gradient-to-b from-surface/50 to-background">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Our <span className="gradient-text">Portfolio</span>
+    <section
+      id="portfolio"
+      style={{
+        padding: "120px 0",
+        background: "#0D1120",
+        position: "relative",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 1,
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+        }}
+      />
+
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 16,
+            }}
+          >
+            <div
+              style={{
+                width: 24,
+                height: 2,
+                background: "linear-gradient(135deg, #3B6FFF, #7C3AED)",
+                borderRadius: 1,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#5B8AFF",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              Case Studies
+            </span>
+            <div
+              style={{
+                width: 24,
+                height: 2,
+                background: "linear-gradient(135deg, #7C3AED, #3B6FFF)",
+                borderRadius: 1,
+              }}
+            />
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Sora', sans-serif",
+              fontSize: "clamp(32px, 4vw, 52px)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: "#F8FAFC",
+              lineHeight: 1.1,
+              marginBottom: 16,
+            }}
+          >
+            Our{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Portfolio
+            </span>
           </h2>
-          <p className="text-xl text-foreground-secondary max-w-3xl mx-auto">
-            Explore our latest projects and see how we&apos;ve helped businesses transform their digital presence.
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 16,
+              color: "#64748B",
+              lineHeight: 1.7,
+              maxWidth: 520,
+              margin: "0 auto",
+            }}
+          >
+            Explore how we&apos;ve helped businesses transform their digital
+            presence with innovative solutions.
           </p>
         </div>
 
-        {/* Featured Projects */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center">Featured Projects</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {featuredProjects.map((project, index) => (
-              <Card
-                key={project.id}
-                hover
-                className="overflow-hidden group"
-                style={{ animationDelay: `${index * 0.1}s` }}
+        {/* Featured - 2 col */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(480px, 1fr))",
+            gap: 16,
+            marginBottom: 16,
+          }}
+        >
+          {featuredProjects.map((project) => (
+            <div
+              key={project.id}
+              onMouseEnter={() => setHoveredId(project.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                borderRadius: 20,
+                border: `1px solid ${hoveredId === project.id ? "rgba(59, 111, 255, 0.3)" : "rgba(255,255,255,0.06)"}`,
+                overflow: "hidden",
+                transition: "all 0.3s ease",
+                background: "#0D1120",
+                transform:
+                  hoveredId === project.id ? "translateY(-4px)" : "none",
+                boxShadow:
+                  hoveredId === project.id
+                    ? "0 20px 60px rgba(0,0,0,0.4)"
+                    : "none",
+              }}
+            >
+              {/* Project visual */}
+              <div
+                style={{
+                  height: 200,
+                  background: `linear-gradient(135deg, ${categoryColor[project.category] || "#3B6FFF"}18 0%, rgba(124, 58, 237, 0.1) 100%)`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 64,
+                  position: "relative",
+                  overflow: "hidden",
+                }}
               >
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-violet-600/20 rounded-t-2xl flex items-center justify-center">
-                  <div className="text-6xl opacity-50">
-                    {project.category === "Healthcare" ? "🏥" : 
-                     project.category === "FinTech" ? "💰" : 
-                     project.category === "E-commerce" ? "🛒" : 
-                     project.category === "Education" ? "🎓" : 
-                     project.category === "Travel" ? "✈️" : "🚀"}
-                  </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    backgroundImage:
+                      "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
+                    backgroundSize: "24px 24px",
+                  }}
+                />
+                {categoryEmoji[project.category] || "🚀"}
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: "24px 28px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 12,
+                  }}
+                >
+                  <span
+                    style={{
+                      padding: "4px 12px",
+                      borderRadius: 100,
+                      background: `${categoryColor[project.category] || "#3B6FFF"}18`,
+                      border: `1px solid ${categoryColor[project.category] || "#3B6FFF"}30`,
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: categoryColor[project.category] || "#3B6FFF",
+                      letterSpacing: "0.05em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {project.category}
+                  </span>
+                  <a
+                    href={project.href}
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 13,
+                      color: "#5B8AFF",
+                      textDecoration: "none",
+                      fontWeight: 500,
+                    }}
+                  >
+                    View Case Study →
+                  </a>
                 </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm px-3 py-1 bg-primary/10 text-primary rounded-full">
-                      {project.category}
-                    </span>
-                    <a 
-                      href={project.href} 
-                      className="text-accent hover:text-primary transition-colors"
+                <h3
+                  style={{
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: 20,
+                    fontWeight: 700,
+                    letterSpacing: "-0.02em",
+                    color: "#F8FAFC",
+                    marginBottom: 8,
+                  }}
+                >
+                  {project.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 14,
+                    color: "#64748B",
+                    lineHeight: 1.65,
+                    marginBottom: 16,
+                  }}
+                >
+                  {project.description}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {project.technologies.slice(0, 4).map((tech, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        padding: "3px 10px",
+                        borderRadius: 6,
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.07)",
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: 11,
+                        color: "#64748B",
+                      }}
                     >
-                      View Case Study →
-                    </a>
-                  </div>
-                  <CardTitle>{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
-                </CardHeader>
-                
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-surface-light text-xs text-foreground-secondary rounded-full border border-border"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* All Projects */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-8 text-center">All Projects</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allProjects.map((project, index) => (
-              <Card
-                key={project.id}
-                hover
-                glass
-                className="overflow-hidden group"
-                style={{ animationDelay: `${(index + 2) * 0.1}s` }}
+        {/* All projects - 3 col */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 16,
+          }}
+        >
+          {allProjects.map((project) => (
+            <div
+              key={project.id}
+              onMouseEnter={() => setHoveredId(project.id + 100)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                borderRadius: 16,
+                border: `1px solid ${hoveredId === project.id + 100 ? "rgba(59, 111, 255, 0.25)" : "rgba(255,255,255,0.06)"}`,
+                overflow: "hidden",
+                transition: "all 0.25s ease",
+                background: "rgba(255,255,255,0.02)",
+                transform:
+                  hoveredId === project.id + 100 ? "translateY(-3px)" : "none",
+              }}
+            >
+              <div
+                style={{
+                  height: 120,
+                  background: `linear-gradient(135deg, ${categoryColor[project.category] || "#3B6FFF"}15 0%, rgba(124, 58, 237, 0.08) 100%)`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 40,
+                }}
               >
-                <div className="aspect-video bg-gradient-to-br from-primary/10 to-violet-600/10 rounded-t-2xl flex items-center justify-center mb-4">
-                  <div className="text-4xl opacity-50">
-                    {project.category === "Healthcare" ? "🏥" : 
-                     project.category === "FinTech" ? "💰" : 
-                     project.category === "E-commerce" ? "🛒" : 
-                     project.category === "Education" ? "🎓" : 
-                     project.category === "Travel" ? "✈️" : "🚀"}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
-                      {project.category}
+                {categoryEmoji[project.category] || "🚀"}
+              </div>
+              <div style={{ padding: "18px 20px" }}>
+                <span
+                  style={{
+                    padding: "3px 10px",
+                    borderRadius: 100,
+                    background: `${categoryColor[project.category] || "#3B6FFF"}18`,
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 10,
+                    fontWeight: 600,
+                    color: categoryColor[project.category] || "#3B6FFF",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {project.category}
+                </span>
+                <h4
+                  style={{
+                    fontFamily: "'Sora', sans-serif",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: "#E2E8F0",
+                    marginTop: 10,
+                    marginBottom: 6,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {project.title}
+                </h4>
+                <p
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 12,
+                    color: "#64748B",
+                    lineHeight: 1.6,
+                    marginBottom: 12,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                  }}
+                >
+                  {project.description}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                  {project.technologies.slice(0, 3).map((tech, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: 4,
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.06)",
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: 10,
+                        color: "#64748B",
+                      }}
+                    >
+                      {tech}
                     </span>
-                  </div>
-                  <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h4>
-                  <p className="text-sm text-foreground-secondary mb-3 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-surface-light text-xs text-foreground-secondary rounded border border-border"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              </Card>
-            ))}
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+        <div style={{ marginTop: 56, textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 16,
+              color: "#64748B",
+              marginBottom: 20,
+            }}
+          >
             Have a project in mind?
-          </h3>
-          <p className="text-foreground-secondary mb-8 max-w-2xl mx-auto">
-            Let&apos;s collaborate to bring your vision to life with our expertise and innovative approach.
           </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-violet-600 text-white font-medium rounded-xl hover:shadow-glow hover:scale-105 transform transition-all duration-300"
+          <button
+            onClick={() =>
+              document
+                .querySelector("#contact")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            style={{
+              padding: "14px 32px",
+              borderRadius: 12,
+              background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 15,
+              fontWeight: 600,
+              color: "white",
+              boxShadow: "0 8px 32px rgba(59, 111, 255, 0.3)",
+              transition: "all 0.25s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 40px rgba(59, 111, 255, 0.45)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 32px rgba(59, 111, 255, 0.3)";
+            }}
           >
             Start Your Project
-          </a>
+          </button>
         </div>
       </div>
     </section>
