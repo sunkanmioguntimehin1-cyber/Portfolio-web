@@ -8,10 +8,16 @@ const SHEETS_WEBHOOK_URL = process.env.GOOGLE_SHEETS_WEBHOOK_URL || "";
 interface LeadData {
   name?: string;
   email?: string;
+  phone?: string;
   company?: string;
+  companyUrl?: string;
   projectType?: string;
   budget?: string;
   timeline?: string;
+  region?: string;
+  service?: string;
+  projectDetails?: string;
+  lookingForJob?: string;
 }
 
 interface SubmitLeadBody {
@@ -103,11 +109,17 @@ async function postToGoogleSheets(lead: LeadData) {
       timestamp: new Date().toISOString(),
       name: lead.name || "",
       email: lead.email || "",
+      phone: lead.phone || "",
       company: lead.company || "",
+      companyUrl: lead.companyUrl || "",
       projectType: lead.projectType || "",
       budget: lead.budget || "",
       timeline: lead.timeline || "",
-      source: "Website Chatbot",
+      region: lead.region || "",
+      service: lead.service || "",
+      projectDetails: lead.projectDetails || "",
+      lookingForJob: lead.lookingForJob || "",
+      source: "Website Get In Touch Form",
     }),
   });
 }

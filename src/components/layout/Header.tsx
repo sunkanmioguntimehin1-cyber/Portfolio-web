@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { siteData } from "@/lib/data";
+import GetInTouchModal from "@/components/sections/GetInTouchModal";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [getInTouchOpen, setGetInTouchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -172,6 +174,37 @@ const Header: React.FC = () => {
             Let&apos;s Talk
           </button>
 
+          {/* Send us an email button */}
+          <button
+            onClick={() => setGetInTouchOpen(true)}
+            style={{
+              display: "none",
+              padding: "10px 20px",
+              borderRadius: 10,
+              background: "rgba(255, 255, 255, 0.06)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              cursor: "pointer",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 14,
+              fontWeight: 600,
+              color: "#F8FAFC",
+              letterSpacing: "0.01em",
+              transition: "all 0.2s ease",
+              backdropFilter: "blur(10px)",
+            }}
+            className="email-btn"
+            onMouseEnter={(e) => {
+              (e.target as HTMLElement).style.background = "rgba(255, 255, 255, 0.1)";
+              (e.target as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.2)";
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLElement).style.background = "rgba(255, 255, 255, 0.06)";
+              (e.target as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.1)";
+            }}
+          >
+            Send us an email
+          </button>
+
           {/* Hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -301,6 +334,27 @@ const Header: React.FC = () => {
             >
               Let&apos;s Talk
             </button>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setGetInTouchOpen(true);
+              }}
+              style={{
+                width: "100%",
+                marginTop: 8,
+                padding: "12px 20px",
+                borderRadius: 10,
+                background: "rgba(255, 255, 255, 0.06)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#F8FAFC",
+              }}
+            >
+              Send us an email
+            </button>
           </div>
         </div>
       </div>
@@ -309,10 +363,16 @@ const Header: React.FC = () => {
         @media (min-width: 768px) {
           .desktop-nav { display: flex !important; }
           .cta-btn { display: block !important; }
+          .email-btn { display: block !important; }
           .hamburger-btn { display: none !important; }
           .mobile-menu { display: none !important; }
         }
       `}</style>
+
+      <GetInTouchModal
+        isOpen={getInTouchOpen}
+        onClose={() => setGetInTouchOpen(false)}
+      />
     </header>
   );
 };
