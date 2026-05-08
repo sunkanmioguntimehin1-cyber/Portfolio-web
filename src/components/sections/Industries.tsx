@@ -11,10 +11,69 @@ const Industries: React.FC = () => {
       id="industries"
       style={{
         padding: "120px 0",
-        background: "#0D1120",
+        background: "#05080F",
         position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Subtle gradient for depth */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(59, 111, 255, 0.08) 0%, transparent 60%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Floating orbs */}
+      <div
+        className="orb-1"
+        style={{
+          position: "absolute",
+          top: "5%",
+          right: "10%",
+          width: 500,
+          height: 500,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        className="orb-2"
+        style={{
+          position: "absolute",
+          bottom: "20%",
+          left: "5%",
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(59, 111, 255, 0.1) 0%, transparent 70%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        className="orb-3"
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "30%",
+          width: 350,
+          height: 200,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0, 212, 170, 0.06) 0%, transparent 70%)",
+          filter: "blur(40px)",
+          pointerEvents: "none",
+        }}
+      />
+
       <div
         style={{
           position: "absolute",
@@ -110,7 +169,7 @@ const Industries: React.FC = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
             gap: 16,
           }}
         >
@@ -124,11 +183,13 @@ const Industries: React.FC = () => {
                 borderRadius: 16,
                 background:
                   hoveredId === industry.id
-                    ? "rgba(59, 111, 255, 0.08)"
-                    : "rgba(255,255,255,0.02)",
+                    ? "rgba(13, 17, 32, 0.85)"
+                    : "rgba(13, 17, 32, 0.6)",
                 border: `1px solid ${hoveredId === industry.id ? "rgba(59, 111, 255, 0.3)" : "rgba(255,255,255,0.06)"}`,
                 transition: "all 0.25s ease",
                 cursor: "pointer",
+                backdropFilter: hoveredId === industry.id ? "blur(12px)" : "none",
+                WebkitBackdropFilter: hoveredId === industry.id ? "blur(12px)" : "none",
               }}
             >
               <div
@@ -200,7 +261,7 @@ const Industries: React.FC = () => {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: 13,
-                      color: "#64748B",
+                      color: "#CBD5E1",
                       lineHeight: 1.6,
                     }}
                   >
@@ -212,6 +273,40 @@ const Industries: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <style>{`
+        /* Animated gradient orbs */
+        .orb-1 {
+          animation: floatOrb1 12s ease-in-out infinite;
+        }
+        .orb-2 {
+          animation: floatOrb2 10s ease-in-out infinite;
+        }
+        .orb-3 {
+          animation: floatOrb3 14s ease-in-out infinite;
+        }
+
+        @keyframes floatOrb1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(30px, -40px) scale(1.1); }
+          50% { transform: translate(-20px, 20px) scale(0.95); }
+          75% { transform: translate(40px, 30px) scale(1.05); }
+        }
+
+        @keyframes floatOrb2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(-30px, 20px) scale(1.1); }
+          50% { transform: translate(20px, -30px) scale(0.9); }
+          75% { transform: translate(-20px, -20px) scale(1.05); }
+        }
+
+        @keyframes floatOrb3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(20px, 30px) scale(1.15); }
+          50% { transform: translate(-30px, -20px) scale(0.95); }
+          75% { transform: translate(10px, -40px) scale(1.1); }
+        }
+      `}</style>
     </section>
   );
 };

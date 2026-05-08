@@ -2,7 +2,6 @@
 
 import React from "react";
 import { siteData } from "@/lib/data";
-import AnimatedCounter from "../ui/AnimatedCounter";
 
 const extraStats = [
   { value: "24/7", label: "Support Available" },
@@ -20,18 +19,60 @@ const Stats: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      {/* Background accent */}
+      {/* Subtle gradient for depth */}
       <div
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 800,
-          height: 400,
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(59, 111, 255, 0.08) 0%, transparent 60%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Floating orbs */}
+      <div
+        className="orb-1"
+        style={{
+          position: "absolute",
+          top: "10%",
+          left: "5%",
+          width: 500,
+          height: 500,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(59, 111, 255, 0.06) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(59, 111, 255, 0.15) 0%, transparent 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        className="orb-2"
+        style={{
+          position: "absolute",
+          top: "30%",
+          right: "10%",
+          width: 350,
+          height: 350,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        className="orb-3"
+        style={{
+          position: "absolute",
+          bottom: "15%",
+          right: "25%",
+          width: 400,
+          height: 250,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(0, 212, 170, 0.08) 0%, transparent 70%)",
+          filter: "blur(40px)",
           pointerEvents: "none",
         }}
       />
@@ -132,6 +173,7 @@ const Stats: React.FC = () => {
             borderRadius: 20,
             overflow: "hidden",
             marginBottom: 16,
+            backdropFilter: "blur(10px)",
           }}
         >
           {siteData.stats.map((stat, index) => (
@@ -144,6 +186,7 @@ const Stats: React.FC = () => {
                   index < 3 ? "1px solid rgba(255,255,255,0.05)" : "none",
                 position: "relative",
                 overflow: "hidden",
+                background: "rgba(13, 17, 32, 0.6)",
               }}
             >
               <div
@@ -158,11 +201,21 @@ const Stats: React.FC = () => {
                   borderRadius: "0 0 4px 4px",
                 }}
               />
-              <AnimatedCounter
-                end={stat.number}
-                suffix={stat.suffix}
-                className="mb-2"
-              />
+              <div
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontSize: "clamp(32px, 4vw, 48px)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.02em",
+                  background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  marginBottom: 4,
+                }}
+              >
+                {stat.number}{stat.suffix}
+              </div>
               <div
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
@@ -235,6 +288,38 @@ const Stats: React.FC = () => {
       <style>{`
         @media (max-width: 767px) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        
+        /* Animated gradient orbs */
+        .orb-1 {
+          animation: floatOrb1 12s ease-in-out infinite;
+        }
+        .orb-2 {
+          animation: floatOrb2 10s ease-in-out infinite;
+        }
+        .orb-3 {
+          animation: floatOrb3 14s ease-in-out infinite;
+        }
+
+        @keyframes floatOrb1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(30px, -40px) scale(1.1); }
+          50% { transform: translate(-20px, 20px) scale(0.95); }
+          75% { transform: translate(40px, 30px) scale(1.05); }
+        }
+
+        @keyframes floatOrb2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(-30px, 20px) scale(1.1); }
+          50% { transform: translate(20px, -30px) scale(0.9); }
+          75% { transform: translate(-20px, -20px) scale(1.05); }
+        }
+
+        @keyframes floatOrb3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(20px, 30px) scale(1.15); }
+          50% { transform: translate(-30px, -20px) scale(0.95); }
+          75% { transform: translate(10px, -40px) scale(1.1); }
         }
       `}</style>
     </section>
