@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { siteData } from "@/lib/data";
 import GetInTouchModal from "@/components/sections/GetInTouchModal";
+import { cn } from "@/lib/utils";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,106 +28,31 @@ const Header: React.FC = () => {
 
   return (
     <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        transition: "all 0.3s ease",
-        background: isScrolled ? "rgba(5, 8, 15, 0.92)" : "transparent",
-        backdropFilter: isScrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: isScrolled ? "blur(20px)" : "none",
-        borderBottom: isScrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
-      }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-[100] transition-all duration-300",
+        isScrolled
+          ? "bg-background/92 backdrop-blur-xl border-b border-white/[0.06]"
+          : "bg-transparent"
+      )}
     >
-      <nav
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 24px",
-          height: 72,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 32,
-        }}
-      >
+      <nav className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
         {/* Logo */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            flexShrink: 0,
-          }}
-        >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-              borderRadius: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "'Sora', sans-serif",
-              fontWeight: 700,
-              fontSize: 16,
-              color: "white",
-              flexShrink: 0,
-            }}
-          >
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          <div className="w-9 h-9 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-[10px] flex items-center justify-center font-display font-bold text-base text-white flex-shrink-0">
             S
           </div>
-          <span
-            style={{
-              fontFamily: "'Sora', sans-serif",
-              fontWeight: 700,
-              fontSize: 18,
-              color: "#F8FAFC",
-              letterSpacing: "-0.02em",
-            }}
-          >
+          <span className="font-display font-bold text-lg text-foreground tracking-tight">
             {siteData.company.name}
           </span>
         </div>
 
         {/* Desktop Nav */}
-        <div
-          style={{
-            display: "none",
-            alignItems: "center",
-            gap: 4,
-          }}
-          className="desktop-nav"
-        >
+        <div className="hidden md:flex items-center gap-1">
           {siteData.navigation.map((item) => (
             <button
               key={item.name}
               onClick={() => handleNavClick(item.href)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: "8px 16px",
-                borderRadius: 8,
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                fontWeight: 500,
-                color: "#94A3B8",
-                transition: "all 0.2s ease",
-                letterSpacing: "0.01em",
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.color = "#F8FAFC";
-                (e.target as HTMLElement).style.background =
-                  "rgba(255,255,255,0.05)";
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = "#94A3B8";
-                (e.target as HTMLElement).style.background = "none";
-              }}
+              className="px-4 py-2 rounded-lg font-sans text-sm font-medium text-foreground-muted transition-all duration-200 hover:text-foreground hover:bg-white/5"
             >
               {item.name}
             </button>
@@ -134,73 +60,17 @@ const Header: React.FC = () => {
         </div>
 
         {/* CTA */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            flexShrink: 0,
-          }}
-        >
+        <div className="flex items-center gap-3 flex-shrink-0">
           <button
             onClick={() => handleNavClick("#contact")}
-            style={{
-              display: "none",
-              padding: "10px 20px",
-              borderRadius: 10,
-              background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 14,
-              fontWeight: 600,
-              color: "white",
-              letterSpacing: "0.01em",
-              transition: "all 0.2s ease",
-              boxShadow: "0 4px 16px rgba(59, 111, 255, 0.3)",
-            }}
-            className="cta-btn"
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.transform = "translateY(-1px)";
-              (e.target as HTMLElement).style.boxShadow =
-                "0 8px 24px rgba(59, 111, 255, 0.45)";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.transform = "translateY(0)";
-              (e.target as HTMLElement).style.boxShadow =
-                "0 4px 16px rgba(59, 111, 255, 0.3)";
-            }}
+            className="hidden md:block px-5 py-2.5 rounded-[10px] bg-gradient-to-r from-teal-400 to-cyan-500 border-none cursor-pointer font-sans text-sm font-semibold text-white tracking-wide transition-all duration-200 shadow-[0_4px_16px_rgba(45,212,191,0.3)] hover:shadow-[0_8px_24px_rgba(45,212,191,0.45)] hover:-translate-y-[1px]"
           >
             Let&apos;s Talk
           </button>
 
-          {/* Send us an email button */}
           <button
             onClick={() => setGetInTouchOpen(true)}
-            style={{
-              display: "none",
-              padding: "10px 20px",
-              borderRadius: 10,
-              background: "rgba(255, 255, 255, 0.06)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 14,
-              fontWeight: 600,
-              color: "#F8FAFC",
-              letterSpacing: "0.01em",
-              transition: "all 0.2s ease",
-              backdropFilter: "blur(10px)",
-            }}
-            className="email-btn"
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.background = "rgba(255, 255, 255, 0.1)";
-              (e.target as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.2)";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.background = "rgba(255, 255, 255, 0.06)";
-              (e.target as HTMLElement).style.borderColor = "rgba(255, 255, 255, 0.1)";
-            }}
+            className="hidden md:block px-5 py-2.5 rounded-[10px] bg-white/[0.06] border border-white/10 cursor-pointer font-sans text-sm font-semibold text-foreground tracking-wide transition-all duration-200 backdrop-blur-md hover:bg-white/10 hover:border-white/20"
           >
             Send us an email
           </button>
@@ -208,129 +78,46 @@ const Header: React.FC = () => {
           {/* Hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            style={{
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 8,
-              width: 40,
-              height: 40,
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 5,
-              padding: 10,
-            }}
-            className="hamburger-btn"
+            className="md:hidden w-10 h-10 rounded-lg bg-white/[0.06] border border-white/[0.08] cursor-pointer flex flex-col items-center justify-center gap-[5px] p-2.5"
             aria-label="Toggle menu"
           >
-            <span
-              style={{
-                display: "block",
-                width: 18,
-                height: 1.5,
-                background: "#F8FAFC",
-                borderRadius: 1,
-                transition: "all 0.3s",
-                transform: isMobileMenuOpen
-                  ? "translateY(6.5px) rotate(45deg)"
-                  : "none",
-              }}
-            />
-            <span
-              style={{
-                display: "block",
-                width: 18,
-                height: 1.5,
-                background: "#F8FAFC",
-                borderRadius: 1,
-                transition: "all 0.3s",
-                opacity: isMobileMenuOpen ? 0 : 1,
-              }}
-            />
-            <span
-              style={{
-                display: "block",
-                width: 18,
-                height: 1.5,
-                background: "#F8FAFC",
-                borderRadius: 1,
-                transition: "all 0.3s",
-                transform: isMobileMenuOpen
-                  ? "translateY(-6.5px) rotate(-45deg)"
-                  : "none",
-              }}
-            />
+            <span className={cn(
+              "block w-[18px] h-[1.5px] bg-foreground rounded-sm transition-all duration-300",
+              isMobileMenuOpen && "translate-y-[6.5px] rotate-45"
+            )} />
+            <span className={cn(
+              "block w-[18px] h-[1.5px] bg-foreground rounded-sm transition-all duration-300",
+              isMobileMenuOpen && "opacity-0"
+            )} />
+            <span className={cn(
+              "block w-[18px] h-[1.5px] bg-foreground rounded-sm transition-all duration-300",
+              isMobileMenuOpen && "-translate-y-[6.5px] -rotate-45"
+            )} />
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
       <div
-        style={{
-          overflow: "hidden",
-          maxHeight: isMobileMenuOpen ? "400px" : "0",
-          transition: "max-height 0.4s ease",
-          background: "rgba(5, 8, 15, 0.97)",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-        }}
-        className="mobile-menu"
+        className={cn(
+          "overflow-hidden transition-[max-height] duration-400 bg-background/97 border-t border-white/[0.06]",
+          isMobileMenuOpen ? "max-h-[400px]" : "max-h-0"
+        )}
       >
-        <div style={{ padding: "12px 24px 24px" }}>
+        <div className="p-3 px-6 pb-6">
           {siteData.navigation.map((item) => (
             <button
               key={item.name}
               onClick={() => handleNavClick(item.href)}
-              style={{
-                display: "block",
-                width: "100%",
-                textAlign: "left",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: "12px 16px",
-                borderRadius: 8,
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 15,
-                fontWeight: 500,
-                color: "#94A3B8",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.target as HTMLElement).style.color = "#F8FAFC";
-                (e.target as HTMLElement).style.background =
-                  "rgba(255,255,255,0.04)";
-              }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = "#94A3B8";
-                (e.target as HTMLElement).style.background = "none";
-              }}
+              className="block w-full text-left bg-none border-none cursor-pointer px-4 py-3 rounded-lg font-sans text-sm font-medium text-foreground-muted transition-all duration-200 hover:text-foreground hover:bg-white/[0.04]"
             >
               {item.name}
             </button>
           ))}
-          <div
-            style={{
-              marginTop: 12,
-              paddingTop: 12,
-              borderTop: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
+          <div className="mt-3 pt-3 border-t border-white/[0.06]">
             <button
               onClick={() => handleNavClick("#contact")}
-              style={{
-                width: "100%",
-                padding: "12px 20px",
-                borderRadius: 10,
-                background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                fontWeight: 600,
-                color: "white",
-              }}
+              className="w-full py-3 px-5 rounded-[10px] bg-gradient-to-r from-teal-400 to-cyan-500 border-none cursor-pointer font-sans text-sm font-semibold text-white"
             >
               Let&apos;s Talk
             </button>
@@ -339,35 +126,13 @@ const Header: React.FC = () => {
                 setIsMobileMenuOpen(false);
                 setGetInTouchOpen(true);
               }}
-              style={{
-                width: "100%",
-                marginTop: 8,
-                padding: "12px 20px",
-                borderRadius: 10,
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                cursor: "pointer",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                fontWeight: 600,
-                color: "#F8FAFC",
-              }}
+              className="w-full mt-2 py-3 px-5 rounded-[10px] bg-white/[0.06] border border-white/10 cursor-pointer font-sans text-sm font-semibold text-foreground"
             >
               Send us an email
             </button>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (min-width: 768px) {
-          .desktop-nav { display: flex !important; }
-          .cta-btn { display: block !important; }
-          .email-btn { display: block !important; }
-          .hamburger-btn { display: none !important; }
-          .mobile-menu { display: none !important; }
-        }
-      `}</style>
 
       <GetInTouchModal
         isOpen={getInTouchOpen}

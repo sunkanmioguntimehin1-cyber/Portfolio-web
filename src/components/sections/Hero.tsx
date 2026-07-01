@@ -1,83 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { siteData } from "@/lib/data";
 
-const ANIMATED_TEXTS = [
-  "Web Development",
-  "Mobile Apps",
-  "AI Solutions",
-  "Cloud Architecture",
-];
-
-const TrustedLogos = [
-  "Google",
-  "Microsoft",
-  "Amazon",
-  "Salesforce",
-  "Meta",
-  "Netflix",
-  "Stripe",
-  "Shopify",
-  "Slack",
-  "Figma",
-];
-
 const Hero: React.FC = () => {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [displayedText, setDisplayedText] = useState("");
-  const [charIndex, setCharIndex] = useState(0);
-
-  useEffect(() => {
-    const currentText = ANIMATED_TEXTS[currentTextIndex];
-    const handleTyping = () => {
-      if (!isDeleting) {
-        if (charIndex < currentText.length) {
-          setDisplayedText(currentText.substring(0, charIndex + 1));
-          setCharIndex((c) => c + 1);
-        } else {
-          setTimeout(() => setIsDeleting(true), 2200);
-        }
-      } else {
-        if (charIndex > 0) {
-          setDisplayedText(currentText.substring(0, charIndex - 1));
-          setCharIndex((c) => c - 1);
-        } else {
-          setIsDeleting(false);
-          setCurrentTextIndex((i) => (i + 1) % ANIMATED_TEXTS.length);
-        }
-      }
-    };
-    const timeout = setTimeout(handleTyping, isDeleting ? 45 : 90);
-    return () => clearTimeout(timeout);
-  }, [charIndex, currentTextIndex, isDeleting]);
-
   const scrollToContact = () => {
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
   };
   const scrollToPortfolio = () => {
-    document
-      .querySelector("#portfolio")
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#portfolio")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      {/* Hero Section */}
       <section
         id="home"
-        style={{
-          position: "relative",
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-          paddingTop: 80,
-          paddingBottom: 0,
-        }}
+        className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20"
       >
         {/* Video Background */}
         <video
@@ -85,511 +23,107 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.6,
-          }}
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark overlay for readability */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(5, 8, 15, 0.5)",
-          }}
-        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-[#080C14]/60" />
 
-        {/* Subtle gradient for depth */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse at 50% 0%, rgba(59, 111, 255, 0.1) 0%, transparent 60%)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          className="orb-1"
-          style={{
-            position: "absolute",
-            top: "5%",
-            left: "10%",
-            width: 600,
-            height: 600,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(59, 111, 255, 0.2) 0%, transparent 70%)",
-            filter: "blur(60px)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          className="orb-2"
-          style={{
-            position: "absolute",
-            top: "20%",
-            right: "5%",
-            width: 400,
-            height: 400,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)",
-            filter: "blur(50px)",
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          className="orb-3"
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: "30%",
-            width: 500,
-            height: 300,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(0, 212, 170, 0.1) 0%, transparent 70%)",
-            filter: "blur(40px)",
-            pointerEvents: "none",
-          }}
-        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(45,212,191,0.12)_0%,transparent_60%)] pointer-events-none" />
 
-        {/* Hero Content */}
-        <div
-          style={{
-            position: "relative",
-            zIndex: 10,
-            width: "100%",
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 24px",
-            textAlign: "center",
-          }}
-        >
+        {/* Radar / Scope Signature */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,700px)] aspect-square pointer-events-none motion-reduce:hidden">
+          <svg viewBox="0 0 200 200" className="w-full h-full">
+            {/* Grid rings */}
+            <circle cx="100" cy="100" r="90" className="fill-none stroke-teal-400/10" strokeWidth="0.5" />
+            <circle cx="100" cy="100" r="60" className="fill-none stroke-teal-400/6" strokeWidth="0.5" />
+            <circle cx="100" cy="100" r="30" className="fill-none stroke-teal-400/6" strokeWidth="0.5" />
+            {/* Crosshairs */}
+            <line x1="10" y1="100" x2="190" y2="100" className="stroke-teal-400/8" strokeWidth="0.3" />
+            <line x1="100" y1="10" x2="100" y2="190" className="stroke-teal-400/8" strokeWidth="0.3" />
+            {/* Sweeping arc */}
+            <path
+              d="M100,100 L10,100 A90,90 0 0,1 100,10 Z"
+              className="fill-teal-400/[0.04]"
+              style={{ transformOrigin: "100px 100px", animation: "radar-sweep 4s linear infinite" }}
+            />
+            {/* Pulse dots */}
+            <circle cx="160" cy="60" r="1.5" className="fill-teal-400" style={{ animation: "radar-ping 2s ease-out infinite" }} />
+            <circle cx="50" cy="140" r="1" className="fill-teal-400/60" style={{ animation: "radar-ping 2.5s ease-out infinite 0.5s" }} />
+            <circle cx="130" cy="170" r="1.2" className="fill-teal-400/80" style={{ animation: "radar-ping 3s ease-out infinite 1s" }} />
+            {/* Center dot */}
+            <circle cx="100" cy="100" r="2" className="fill-teal-400/40" />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 text-center">
           {/* Eyebrow badge */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "6px 16px 6px 8px",
-              borderRadius: 100,
-              background: "rgba(59, 111, 255, 0.1)",
-              border: "1px solid rgba(59, 111, 255, 0.2)",
-              marginBottom: 32,
-              animation: "fadeInUp 0.6s ease-out both",
-            }}
-          >
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                background: "rgba(59, 111, 255, 0.2)",
-              }}
-            >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: "#3B6FFF",
-                  display: "block",
-                  animation: "pulse 2s infinite",
-                }}
-              />
-            </span>
-            <span
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 13,
-                fontWeight: 500,
-                color: "#5B8AFF",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Welcome to SuperSoft Engineering
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in-up">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="font-sans text-xs font-medium text-primary tracking-wide">
+              SuperSoft Engineering
             </span>
           </div>
 
-          {/* Main headline */}
-          <h1
-            style={{
-              fontFamily: "'Sora', sans-serif",
-              fontSize: "clamp(42px, 7vw, 80px)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-              color: "#F8FAFC",
-              marginBottom: 20,
-              animation: "fadeInUp 0.7s ease-out 0.1s both",
-            }}
-          >
-            {siteData.hero.title}
+          {/* Bold stat headline */}
+          <h1 className="font-display text-[clamp(36px,5vw,64px)] font-extrabold tracking-tighter leading-[1.05] text-foreground mb-4 animate-fade-in-up">
+            <span className="block">{siteData.stats[0].number}{siteData.stats[0].suffix} products shipped.</span>
+            <span className="block mt-1">
+              {siteData.stats[1].number}{siteData.stats[1].suffix} years of engineering.
+            </span>
           </h1>
 
-          {/* Animated typewriter line */}
-          <div
-            style={{
-              height: "clamp(40px, 5vw, 60px)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 24,
-              animation: "fadeInUp 0.7s ease-out 0.2s both",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'Sora', sans-serif",
-                fontSize: "clamp(24px, 4vw, 44px)",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              {displayedText}
-              <span
-                style={{
-                  WebkitTextFillColor: "#3B6FFF",
-                  opacity: 1,
-                  animation: "blink 1s step-end infinite",
-                }}
-              >
-                |
-              </span>
-            </span>
-          </div>
-
           {/* Subtitle */}
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "clamp(16px, 2vw, 20px)",
-              fontWeight: 400,
-              color: "#94A3B8",
-              lineHeight: 1.7,
-              maxWidth: 580,
-              margin: "0 auto 48px",
-              animation: "fadeInUp 0.7s ease-out 0.3s both",
-            }}
-          >
+          <p className="font-sans text-[clamp(15px,1.8vw,19px)] text-foreground-secondary leading-relaxed max-w-[560px] mx-auto mb-10 animate-fade-in-up">
             {siteData.hero.subtitle}
           </p>
 
           {/* CTA Buttons */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 12,
-              justifyContent: "center",
-              marginBottom: 72,
-              animation: "fadeInUp 0.7s ease-out 0.4s both",
-            }}
-          >
+          <div className="flex flex-wrap gap-3 justify-center mb-20 animate-fade-in-up">
             <button
               onClick={scrollToContact}
-              style={{
-                padding: "14px 32px",
-                borderRadius: 12,
-                background: "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 16,
-                fontWeight: 600,
-                color: "white",
-                letterSpacing: "0.01em",
-                transition: "all 0.25s ease",
-                boxShadow: "0 8px 32px rgba(59, 111, 255, 0.35)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.transform = "translateY(-2px)";
-                el.style.boxShadow = "0 12px 40px rgba(59, 111, 255, 0.5)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.transform = "translateY(0)";
-                el.style.boxShadow = "0 8px 32px rgba(59, 111, 255, 0.35)";
-              }}
+              className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-teal-400 to-cyan-500 border-none cursor-pointer font-sans text-sm font-semibold text-white tracking-wide transition-all duration-200 shadow-[0_8px_32px_rgba(45,212,191,0.35)] hover:shadow-[0_12px_40px_rgba(45,212,191,0.5)] hover:-translate-y-0.5"
             >
-              Start Your Project →
+              Start Your Project &rarr;
             </button>
             <button
               onClick={scrollToPortfolio}
-              style={{
-                padding: "14px 32px",
-                borderRadius: 12,
-                background: "rgba(255, 255, 255, 0.06)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                cursor: "pointer",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 16,
-                fontWeight: 600,
-                color: "#F8FAFC",
-                letterSpacing: "0.01em",
-                transition: "all 0.25s ease",
-                backdropFilter: "blur(10px)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(255, 255, 255, 0.1)";
-                el.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                el.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "rgba(255, 255, 255, 0.06)";
-                el.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                el.style.transform = "translateY(0)";
-              }}
+              className="px-8 py-3.5 rounded-xl bg-white/[0.06] border border-white/10 cursor-pointer font-sans text-sm font-semibold text-foreground tracking-wide transition-all duration-200 backdrop-blur-md hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5"
             >
               View Our Work
             </button>
           </div>
-
-          {/* Stats row */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 1,
-              maxWidth: 720,
-              margin: "0 auto 80px",
-              background: "rgba(255,255,255,0.05)",
-              borderRadius: 16,
-              border: "1px solid rgba(255,255,255,0.07)",
-              overflow: "hidden",
-              animation: "fadeInUp 0.7s ease-out 0.5s both",
-            }}
-          >
-            {siteData.stats.slice(0, 4).map((stat, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "24px 16px",
-                  textAlign: "center",
-                  borderRight:
-                    i < 3 ? "1px solid rgba(255,255,255,0.05)" : "none",
-                  background: "rgba(13, 17, 32, 0.6)",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Sora', sans-serif",
-                    fontSize: "clamp(24px, 3vw, 36px)",
-                    fontWeight: 800,
-                    letterSpacing: "-0.02em",
-                    background:
-                      "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    marginBottom: 4,
-                  }}
-                >
-                  {stat.number}
-                  {stat.suffix}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 12,
-                    fontWeight: 500,
-                    color: "#64748B",
-                    letterSpacing: "0.03em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Scroll indicator */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 32,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 8,
-            animation: "fadeIn 1s ease-out 1s both",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 11,
-              color: "#64748B",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              fontFamily: "'DM Sans', sans-serif",
-            }}
-          >
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in">
+          <span className="font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-foreground-muted">
             Scroll
           </span>
-          <div
-            style={{
-              width: 24,
-              height: 38,
-              border: "1.5px solid rgba(255,255,255,0.15)",
-              borderRadius: 12,
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              padding: "5px 0",
-            }}
-          >
-            <div
-              style={{
-                width: 4,
-                height: 8,
-                background: "linear-gradient(180deg, #3B6FFF, transparent)",
-                borderRadius: 2,
-                animation: "scrollDot 1.5s ease-in-out infinite",
-              }}
-            />
+          <div className="w-5 h-8 border border-white/15 rounded-full flex items-start justify-center pt-1.5">
+            <div className="w-1 h-1.5 bg-gradient-to-b from-teal-400 to-transparent rounded-full animate-bounce" />
           </div>
         </div>
-
-        <style>{`
-          @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-          }
-          @keyframes scrollDot {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(14px); opacity: 0; }
-          }
-          @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-
-          /* Animated gradient orbs */
-          .orb-1 {
-            animation: floatOrb1 12s ease-in-out infinite;
-          }
-          .orb-2 {
-            animation: floatOrb2 10s ease-in-out infinite;
-          }
-          .orb-3 {
-            animation: floatOrb3 14s ease-in-out infinite;
-          }
-
-          @keyframes floatOrb1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -40px) scale(1.1); }
-            50% { transform: translate(-20px, 20px) scale(0.95); }
-            75% { transform: translate(40px, 30px) scale(1.05); }
-          }
-
-          @keyframes floatOrb2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-30px, 20px) scale(1.1); }
-            50% { transform: translate(20px, -30px) scale(0.9); }
-            75% { transform: translate(-20px, -20px) scale(1.05); }
-          }
-
-          @keyframes floatOrb3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, 30px) scale(1.15); }
-            50% { transform: translate(-30px, -20px) scale(0.95); }
-            75% { transform: translate(10px, -40px) scale(1.1); }
-          }
-        `}</style>
       </section>
 
       {/* Trusted By Section */}
-      <div
-        style={{
-          background: "#0D1120",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          borderBottom: "1px solid rgba(255,255,255,0.05)",
-          padding: "40px 0",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 24px",
-          }}
-        >
-          <p
-            style={{
-              textAlign: "center",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              fontWeight: 600,
-              color: "#4A5568",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              marginBottom: 28,
-            }}
-          >
+      <section className="relative py-10 bg-surface border-y border-white/[0.05] overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <p className="text-center font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-foreground-muted/50 mb-6">
             Trusted by leading companies worldwide
           </p>
-
-          {/* Marquee */}
-          <div style={{ overflow: "hidden", position: "relative" }}>
-            <div
-              style={{
-                display: "flex",
-                width: "max-content",
-                animation: "marquee 25s linear infinite",
-                gap: 0,
-              }}
-            >
-              {[...TrustedLogos, ...TrustedLogos].map((name, i) => (
+          <div className="overflow-hidden">
+            <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+              {[...siteData.clientLogos, ...siteData.clientLogos].map((name, i) => (
                 <div
                   key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minWidth: 140,
-                    padding: "0 24px",
-                    borderRight: "1px solid rgba(255,255,255,0.05)",
-                  }}
+                  className="flex items-center justify-center min-w-[130px] px-5 border-r border-white/[0.05]"
                 >
-                  <span
-                    style={{
-                      fontFamily: "'Sora', sans-serif",
-                      fontSize: 15,
-                      fontWeight: 700,
-                      color: "#334155",
-                      letterSpacing: "-0.01em",
-                      transition: "color 0.2s ease",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                  <span className="font-display text-sm font-bold tracking-tight whitespace-nowrap text-foreground-muted/40 transition-colors duration-200 hover:text-foreground-muted/70">
                     {name}
                   </span>
                 </div>
@@ -597,13 +131,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-        <style>{`
-          @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-          }
-        `}</style>
-      </div>
+      </section>
     </>
   );
 };

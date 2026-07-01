@@ -19,10 +19,10 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed";
+  const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400/50 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed";
   
   const variants = {
-    primary: "bg-gradient-to-r from-primary to-violet-600 text-white hover:shadow-glow hover:scale-105 transform",
+    primary: "bg-gradient-to-r from-teal-400 to-cyan-500 text-white hover:shadow-glow hover:scale-105 transform",
     secondary: "bg-surface text-foreground hover:bg-surface-light hover:scale-105 transform",
     outline: "border border-primary text-primary hover:bg-primary hover:text-white hover:scale-105 transform",
     ghost: "text-foreground hover:bg-surface hover:scale-105 transform",

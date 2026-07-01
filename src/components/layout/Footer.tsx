@@ -8,77 +8,25 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      style={{
-        background: "#0D1120",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
-    >
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+    <footer className="bg-surface border-t border-white/[0.06]">
+      <div className="max-w-[1200px] mx-auto px-6">
         {/* Main footer content */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
-            gap: 40,
-            padding: "64px 0 48px",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 py-16 border-b border-white/[0.05]">
           {/* Brand */}
           <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                marginBottom: 16,
-              }}
-            >
-              <div
-                style={{
-                  width: 36,
-                  height: 36,
-                  background:
-                    "linear-gradient(135deg, #3B6FFF 0%, #7C3AED 100%)",
-                  borderRadius: 10,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "'Sora', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: "white",
-                }}
-              >
+            <div className="flex items-center gap-2.5 mb-4">
+              <div className="w-9 h-9 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-[10px] flex items-center justify-center font-display font-bold text-base text-white">
                 S
               </div>
-              <span
-                style={{
-                  fontFamily: "'Sora', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 18,
-                  color: "#F8FAFC",
-                  letterSpacing: "-0.02em",
-                }}
-              >
+              <span className="font-display font-bold text-lg text-foreground tracking-tight">
                 {siteData.company.name}
               </span>
             </div>
-            <p
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 14,
-                color: "#64748B",
-                lineHeight: 1.7,
-                maxWidth: 300,
-                marginBottom: 24,
-              }}
-            >
+            <p className="font-sans text-sm text-foreground-muted leading-relaxed max-w-[300px] mb-6">
               {siteData.company.description}
             </p>
             {/* Social links */}
-            <div style={{ display: "flex", gap: 8 }}>
+            <div className="flex gap-2">
               {[
                 { Icon: Twitter, label: "Twitter" },
                 { Icon: Linkedin, label: "LinkedIn" },
@@ -89,33 +37,7 @@ const Footer: React.FC = () => {
                   key={label}
                   href="#"
                   aria-label={label}
-                  style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 8,
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#64748B",
-                    textDecoration: "none",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "rgba(59, 111, 255, 0.12)";
-                    el.style.borderColor = "rgba(59, 111, 255, 0.3)";
-                    el.style.color = "#5B8AFF";
-                    el.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "rgba(255,255,255,0.04)";
-                    el.style.borderColor = "rgba(255,255,255,0.07)";
-                    el.style.color = "#64748B";
-                    el.style.transform = "translateY(0)";
-                  }}
+                  className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-foreground-muted no-underline transition-all duration-200 hover:bg-teal-400/15 hover:border-teal-400/30 hover:text-teal-400 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/50"
                 >
                   <Icon size={14} />
                 </a>
@@ -130,47 +52,15 @@ const Footer: React.FC = () => {
             { title: "Industries", items: siteData.footer.industries },
           ].map(({ title, items }) => (
             <div key={title}>
-              <h4
-                style={{
-                  fontFamily: "'Sora', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "#F8FAFC",
-                  letterSpacing: "0.02em",
-                  marginBottom: 20,
-                  textTransform: "uppercase",
-                }}
-              >
+              <h4 className="font-display text-xs font-bold text-foreground tracking-wide mb-5 uppercase">
                 {title}
               </h4>
-              <ul
-                style={{
-                  listStyle: "none",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 10,
-                }}
-              >
+              <ul className="list-none flex flex-col gap-2.5">
                 {items.map((item) => (
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: 14,
-                        color: "#64748B",
-                        textDecoration: "none",
-                        transition: "color 0.2s ease",
-                        lineHeight: 1.5,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#CBD5E1";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#64748B";
-                      }}
+                      className="font-sans text-sm text-foreground-muted no-underline transition-colors duration-200 hover:text-foreground-secondary focus-visible:outline-none focus-visible:text-foreground-secondary"
                     >
                       {item.name}
                     </a>
@@ -182,44 +72,17 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "24px 0",
-            flexWrap: "wrap",
-            gap: 16,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 13,
-              color: "#4A5568",
-            }}
-          >
-            © {year} {siteData.company.name}. All rights reserved.
+        <div className="flex flex-col sm:flex-row justify-between items-center py-6 gap-4">
+          <p className="font-sans text-xs text-slate-700">
+            &copy; {year} {siteData.company.name}. All rights reserved.
           </p>
-          <div style={{ display: "flex", gap: 24 }}>
+          <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
               (item) => (
                 <a
                   key={item}
                   href="#"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 13,
-                    color: "#4A5568",
-                    textDecoration: "none",
-                    transition: "color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "#94A3B8";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.color = "#4A5568";
-                  }}
+                  className="font-sans text-xs text-slate-700 no-underline transition-colors duration-200 hover:text-foreground-muted focus-visible:outline-none focus-visible:text-foreground-muted"
                 >
                   {item}
                 </a>

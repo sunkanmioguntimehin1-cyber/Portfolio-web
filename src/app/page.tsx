@@ -8,6 +8,9 @@ import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
 import Team from "@/components/sections/Team";
 import Contact from "@/components/sections/Contact";
+import TechStack from "@/components/sections/TechStack";
+import FeaturedInsights from "@/components/sections/FeaturedInsights";
+import Partnerships from "@/components/sections/Partnerships";
 
 export default function Home() {
   return (
@@ -17,11 +20,14 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <TechStack />
         <Industries />
         <Stats />
         <Portfolio />
+        <FeaturedInsights />
         <Testimonials />
         <Team />
+        <Partnerships />
         <Contact />
       </main>
       

@@ -66,7 +66,7 @@ const config: Config = {
       },
       boxShadow: {
         "glass": "0 8px 32px rgba(0, 0, 0, 0.3)",
-        "glow": "0 0 20px rgba(59, 130, 246, 0.5)",
+        "glow": "0 0 20px rgba(45, 212, 191, 0.5)",
       },
     },
   },

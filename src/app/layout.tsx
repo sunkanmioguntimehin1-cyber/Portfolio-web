@@ -6,13 +6,13 @@ import "./globals.css";
 import ChatBot from "@/components/ChatBot";
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-inter --font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+  variable: "--font-jetbrains-mono --font-mono",
   subsets: ["latin"],
   display: "swap",
 });
